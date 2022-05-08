@@ -1,4 +1,3 @@
-# link: https://leetcode.com/problems/contains-duplicate/
 # O(n) time | O(n) space
 
 class Solution(object):
@@ -7,10 +6,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        dic = set()
+        map = set()
         for num in nums:
-            if num in dic:
+            if num in map:
                 return True
             else:
-                dic.add(num)
+                map.add(num)
         return False

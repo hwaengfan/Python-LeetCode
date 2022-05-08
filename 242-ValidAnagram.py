@@ -1,4 +1,3 @@
-# https://leetcode.com/problems/valid-anagram/
 # O(n) time | O(n) space
 
 class Solution(object):

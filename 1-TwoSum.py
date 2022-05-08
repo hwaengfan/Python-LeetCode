@@ -1,3 +1,5 @@
+# O(n) time | O(n) space
+
 class Solution(object):
     def twoSum(self, nums, target):
         """
