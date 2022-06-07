@@ -3,29 +3,34 @@
 # output: [1, 1, 2, 2, 2, 2] because this is the longest continuous array that has at most two types
 
 # Algo:
-# hashset to keep track of 2 current pairs, and i - start + 1 to keep track of len of 2 current pairs
-# when reach a new num: loop backward to find last of the 2 current pair, remove it, then update new start
+# hashset to keep track of 2 current pairs, start and end are indicies of subarray
+# when reach a new num: remove last num of subarray, add new num and update start
+
+# O(n) time | O(2) space?
 
 def twoTypes(nums):
     hashset = set()
     maxLen = 0
     start = 0
+    end = 0
 
     for i, num in enumerate(nums):
         if len(hashset) < 2 or num in hashset:
+            end = i
             hashset.add(num)
-            maxLen = max(maxLen, i - start + 1)
+            maxLen = max(maxLen, end - start + 1)
         else:
-            last = nums[i - 1]
-            for j in range(i - 1, 0, -1):
-                if (last != nums[j]):
-                    start = j + 1
-                    hashset.remove(nums[j])
-                    hashset.add(num)
-                    break
+            hashset.remove(nums[start])
+            start = end + 1
+            hashset.add(num)
 
     return maxLen
 
 
-nums = [1, 1, 2, 2, 2, 2, 3, 2, 1]
+nums = [1, 2, 2, 2, 3, 3, 4, 4, 5, 6]
+# nums = [1, 1, 2, 2, 2, 2, 3, 2, 1]
+# nums = [0, 1, 1]
+# nums = [1, 1]
+# nums = []
+
 print(twoTypes(nums))
