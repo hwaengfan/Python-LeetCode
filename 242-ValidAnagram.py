@@ -7,26 +7,12 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        if len(s) != len(t):
-            return False
-
-        schar = {}
+        sSeen, tSeen = {}, {}
 
         for c in s:
-            if c in schar:
-                schar[c] += 1
-            else:
-                schar[c] = 1
+            sSeen[c] = sSeen.get(c, 0) + 1
 
         for c in t:
-            if c not in schar:
-                return False
-            else:
-                schar[c] -= 1
-                if schar[c] == 0:
-                    schar.pop(c)
+            tSeen[c] = tSeen.get(c, 0) + 1
 
-        if len(schar) == 0:
-            return True
-
-        return False
+        return sSeen == tSeen
