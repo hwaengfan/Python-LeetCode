@@ -1,44 +1,42 @@
-def isValidSudoku(board):
-    def checkRow(board, row):
+class Solution:
+    def checkRow(self, board, row):
         seen = set()
         for i in range(9):
             if board[row][i] != '.':
                 if board[row][i] in seen:
                     return False
-            else:
-                seen.add(board[row][i])
+                else:
+                    seen.add(board[row][i])
         return True
 
-    def checkCol(board, col):
+    def checkCol(self, board, col):
         seen = set()
         for i in range(9):
             if board[i][col] != '.':
                 if board[i][col] in seen:
                     return False
-            else:
-                seen.add(board[i][col])
+                else:
+                    seen.add(board[i][col])
         return True
 
-    def checkGrid(board, xPos, yPos):
+    def checkBox(self, board, row, col):
         seen = set()
-        gridX = xPos - xPos % 3
-        gridY = yPos - yPos % 3
-
+        x = row - row % 3
+        y = col - col % 3
         for i in range(3):
             for j in range(3):
-                curr = board[gridX + i][gridY + j]
-                if curr != '.':
-                    if curr in seen:
+                num = board[x + i][y + j]
+                if num != '.':
+                    if num in seen:
                         return False
                     else:
-                        seen.add(curr)
+                        seen.add(num)
         return True
 
-    for i in range(9):
-        for j in range(9):
-            if board[i][j] == '.':
-                continue
-            else:
-                if not (checkRow(board, i) and checkCol(board, j) and checkGrid(board, i, j)):
-                    return False
-    return True
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != ".":
+                    if not (self.checkRow(board, i) and self.checkCol(board, j) and self.checkBox(board, i, j)):
+                        return False
+        return True

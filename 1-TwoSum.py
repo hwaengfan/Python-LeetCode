@@ -1,8 +1,10 @@
-def twoSum(nums, target):
-    prevMap = {}
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        pair = {}
 
-    for i, n in enumerate(nums):
-        diff = target - n
-        if diff in prevMap:
-            return [i, prevMap[diff]]
-        prevMap[n] = i
+        for i, num in enumerate(nums):
+            if num in pair:
+                return [pair[num], i]
+            pair[target - num] = i
+
+        return []

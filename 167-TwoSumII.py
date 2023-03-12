@@ -1,19 +1,14 @@
-def twoSum(numbers, target):
-    # O(n) time and O(n) space
-    remain = {}
-    for i in range(len(numbers)):
-        if numbers[i] in remain:
-            return [remain[numbers[i]] + 1, i + 1]
-        else:
-            remain[target - numbers[i]] = i
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        l, r = 0, len(numbers) - 1
 
-    # O(n) time and O(1) space
-    l, r = 0, len(numbers) - 1
-    while(l < r):
-        currSum = numbers[l] + numbers[r]
-        if currSum < target:
-            l += 1
-        elif currSum > target:
-            r -= 1
-        else:
-            return [l + 1, r + 1]
+        while l < r:
+            total = numbers[l] + numbers[r]
+            if total == target:
+                return [l + 1, r + 1]
+            elif total < target:
+                l += 1
+            else:
+                r -= 1
+
+        return []

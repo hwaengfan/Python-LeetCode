@@ -1,5 +1,5 @@
 class Solution:
-    def dailyTemperatures(temperatures):
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         res = [0] * len(temperatures)
         stack = []  # pair: [temp, index]
 
@@ -9,3 +9,4 @@ class Solution:
                 res[stackInd] = i - stackInd
             stack.append((t, i))
         return res
+            

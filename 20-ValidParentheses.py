@@ -1,14 +1,17 @@
-def isValid(s):
-    stack = []
-    closeToOpen = {"}": "{", ")": "(", "]": "["}
+class Solution:
+    def isValid(self, s: str) -> bool:
+        mapChar = {
+            "}": "{",
+            ")": "(",
+            "]": "["
+        }
 
-    for c in s:
-        if stack and c in closeToOpen:
-            if stack[-1] == closeToOpen[c]:
+        stack = []
+
+        for c in s:
+            if stack and mapChar.get(c, "") == stack[-1]:
                 stack.pop()
             else:
-                return False
-        else:
-            stack.append(c)
+                stack.append(c)
 
-    return True if not stack else False
+        return len(stack) == 0
